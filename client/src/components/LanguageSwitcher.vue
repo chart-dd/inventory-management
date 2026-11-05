@@ -96,35 +96,41 @@ const selectLanguage = (locale) => {
 .language-button {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 0.875rem;
-  background: white;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
+  gap: var(--space-2);
+  height: 36px;
+  padding: 0 var(--space-3);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background var(--transition-fast), border-color var(--transition-fast);
   font-family: inherit;
-  font-size: 0.875rem;
-  color: #334155;
+  font-size: var(--text-sm);
+  color: var(--gray-700);
 }
 
 .language-button:hover {
-  background: #f8fafc;
-  border-color: #cbd5e1;
+  background: var(--bg-hover);
+  border-color: var(--gray-300);
+}
+
+.language-button:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
 }
 
 .globe-icon {
-  color: #64748b;
+  color: var(--text-muted);
   flex-shrink: 0;
 }
 
 .language-label {
-  font-weight: 500;
+  font-weight: var(--weight-medium);
 }
 
 .chevron {
-  color: #64748b;
-  transition: transform 0.2s ease;
+  color: var(--text-muted);
+  transition: transform var(--transition-fast);
   flex-shrink: 0;
 }
 
@@ -132,15 +138,16 @@ const selectLanguage = (locale) => {
   transform: rotate(180deg);
 }
 
+/* Dropdown opens downward; z-index above the header (20) */
 .dropdown-menu {
   position: absolute;
-  top: calc(100% + 0.5rem);
+  top: calc(100% + var(--space-1));
   right: 0;
-  min-width: 160px;
-  background: white;
-  border: 1px solid #e2e8f0;
-  border-radius: 10px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  min-width: 156px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
   z-index: 1000;
   overflow: hidden;
 }
@@ -150,26 +157,26 @@ const selectLanguage = (locale) => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.75rem;
-  padding: 0.75rem 1rem;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
   background: none;
   border: none;
   text-align: left;
   cursor: pointer;
-  transition: background 0.15s ease;
+  transition: background var(--transition-fast);
   font-family: inherit;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: #334155;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--gray-700);
 }
 
 .dropdown-item:hover {
-  background: #f8fafc;
+  background: var(--bg-hover);
 }
 
 .dropdown-item.active {
-  background: #eff6ff;
-  color: #2563eb;
+  background: var(--accent-subtle);
+  color: var(--accent);
 }
 
 .language-name {
@@ -177,7 +184,7 @@ const selectLanguage = (locale) => {
 }
 
 .check-icon {
-  color: #2563eb;
+  color: var(--accent);
   flex-shrink: 0;
 }
 </style>

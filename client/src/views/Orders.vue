@@ -172,46 +172,30 @@ export default {
 </script>
 
 <style scoped>
-/* Fixed table layout to prevent column shifting */
+/* Fixed table layout prevents column shifting when items dropdown opens */
 .orders-table {
   table-layout: fixed;
   width: 100%;
 }
 
-/* Column widths */
-.col-order-number {
-  width: 130px;
-}
+/* Explicit column widths for stable layout */
+.col-order-number { width: 130px; }
+.col-customer     { width: 180px; }
+.col-items        { width: 200px; }
+.col-status       { width: 130px; }
+.col-date         { width: 140px; }
+.col-value        { width: 120px; }
 
-.col-customer {
-  width: 180px;
-}
-
-.col-items {
-  width: 200px;
-}
-
-.col-status {
-  width: 130px;
-}
-
-.col-date {
-  width: 140px;
-}
-
-.col-value {
-  width: 120px;
-}
-
-/* Items details styling */
+/* Expandable items cell */
 .items-details {
   position: relative;
 }
 
 .items-summary {
   cursor: pointer;
-  color: #3b82f6;
-  font-weight: 500;
+  color: var(--accent);
+  font-weight: var(--weight-medium);
+  font-size: var(--text-sm);
   list-style: none;
   user-select: none;
   display: inline-block;
@@ -224,9 +208,9 @@ export default {
 .items-summary::before {
   content: '▶';
   display: inline-block;
-  margin-right: 0.375rem;
-  font-size: 0.75rem;
-  transition: transform 0.2s;
+  margin-right: var(--space-1);
+  font-size: var(--text-xs);
+  transition: transform var(--transition-fast);
 }
 
 .items-details[open] .items-summary::before {
@@ -234,21 +218,21 @@ export default {
 }
 
 .items-summary:hover {
-  color: #2563eb;
+  color: var(--accent-hover);
   text-decoration: underline;
 }
 
-/* Dropdown container */
+/* Floating dropdown for order line items */
 .items-dropdown {
   position: absolute;
   top: 100%;
   left: 0;
-  margin-top: 0.5rem;
-  background: white;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  padding: 0.75rem;
+  margin-top: var(--space-2);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  padding: var(--space-3);
   z-index: 10;
   min-width: 300px;
   max-width: 400px;
@@ -257,9 +241,9 @@ export default {
 .item-entry {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
-  padding: 0.5rem;
-  border-bottom: 1px solid #f1f5f9;
+  gap: var(--space-1);
+  padding: var(--space-2);
+  border-bottom: 1px solid var(--gray-100);
 }
 
 .item-entry:last-child {
@@ -267,13 +251,13 @@ export default {
 }
 
 .item-name {
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: #0f172a;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--text);
 }
 
 .item-meta {
-  font-size: 0.813rem;
-  color: #64748b;
+  font-size: var(--text-xs);
+  color: var(--text-muted);
 }
 </style>

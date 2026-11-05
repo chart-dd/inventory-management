@@ -86,10 +86,10 @@
               <div class="order-health-chart">
                 <svg viewBox="0 0 200 200" class="donut-svg-compact">
                   <circle cx="100" cy="100" r="65" fill="none" stroke="#e2e8f0" stroke-width="25"/>
-                  <circle cx="100" cy="100" r="65" fill="none" stroke="#10b981" stroke-width="25"
+                  <circle cx="100" cy="100" r="65" fill="none" stroke="#16a34a" stroke-width="25"
                     :stroke-dasharray="`${getCircleSegment(statusData.delivered)} 408`"
                     stroke-dashoffset="0" transform="rotate(-90 100 100)"/>
-                  <circle cx="100" cy="100" r="65" fill="none" stroke="#3b82f6" stroke-width="25"
+                  <circle cx="100" cy="100" r="65" fill="none" stroke="#2563eb" stroke-width="25"
                     :stroke-dasharray="`${getCircleSegment(statusData.shipped)} 408`"
                     :stroke-dashoffset="`-${getCircleSegment(statusData.delivered)}`"
                     transform="rotate(-90 100 100)"/>
@@ -97,7 +97,7 @@
                     :stroke-dasharray="`${getCircleSegment(statusData.processing)} 408`"
                     :stroke-dashoffset="`-${getCircleSegment(statusData.delivered) + getCircleSegment(statusData.shipped)}`"
                     transform="rotate(-90 100 100)"/>
-                  <circle cx="100" cy="100" r="65" fill="none" stroke="#ef4444" stroke-width="25"
+                  <circle cx="100" cy="100" r="65" fill="none" stroke="#dc2626" stroke-width="25"
                     :stroke-dasharray="`${getCircleSegment(statusData.backordered)} 408`"
                     :stroke-dashoffset="`-${getCircleSegment(statusData.delivered) + getCircleSegment(statusData.shipped) + getCircleSegment(statusData.processing)}`"
                     transform="rotate(-90 100 100)"/>
@@ -105,10 +105,10 @@
                   <text x="100" y="120" text-anchor="middle" class="donut-center-value">{{ orderHealthMetrics.totalOrders }}</text>
                 </svg>
                 <div class="donut-legend-compact">
-                  <div class="legend-item-compact"><span class="legend-dot" style="background: #10b981"></span>{{ t('status.delivered') }}</div>
-                  <div class="legend-item-compact"><span class="legend-dot" style="background: #3b82f6"></span>{{ t('status.shipped') }}</div>
+                  <div class="legend-item-compact"><span class="legend-dot" style="background: #16a34a"></span>{{ t('status.delivered') }}</div>
+                  <div class="legend-item-compact"><span class="legend-dot" style="background: #2563eb"></span>{{ t('status.shipped') }}</div>
                   <div class="legend-item-compact"><span class="legend-dot" style="background: #f59e0b"></span>{{ t('status.processing') }}</div>
-                  <div class="legend-item-compact"><span class="legend-dot" style="background: #ef4444"></span>{{ t('status.backordered') }}</div>
+                  <div class="legend-item-compact"><span class="legend-dot" style="background: #dc2626"></span>{{ t('status.backordered') }}</div>
                 </div>
               </div>
 
@@ -199,7 +199,7 @@
                     </span>
                   </td>
                   <td @click="showBacklogDetail(item)" style="cursor: pointer;">
-                    <span :style="{ color: item.days_delayed > 7 ? '#ef4444' : '#f59e0b', fontWeight: 600 }">
+                    <span :style="{ color: item.days_delayed > 7 ? '#dc2626' : '#b45309', fontWeight: 600 }">
                       {{ item.days_delayed }} {{ t('dashboard.inventoryShortages.days') }}
                     </span>
                   </td>
@@ -727,143 +727,117 @@ export default {
 </script>
 
 <style scoped>
-.page-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
-}
+/* .page-header, .card, .card-header, .card-title — handled globally */
 
-.header-meta {
-  font-size: 0.813rem;
-  color: #64748b;
-}
-
-.kpi-section {
-  margin-bottom: 1.5rem;
-}
-
+/* ── Section labels (e.g. "Key Performance Indicators") ── */
 .section-title {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #475569;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  margin-bottom: 1rem;
+  margin: 0 0 var(--space-4);
+}
+
+/* ── KPI row ── */
+.kpi-section {
+  margin-bottom: var(--space-6);
 }
 
 .kpi-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1rem;
+  gap: var(--space-4);
 }
 
+/* Individual KPI card */
 .kpi-card {
-  background: white;
-  border: 1px solid #e2e8f0;
-  border-radius: 10px;
-  padding: 1rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-4);
 }
 
 .kpi-header {
-  margin-bottom: 0.75rem;
+  margin-bottom: var(--space-3);
 }
 
 .kpi-label {
-  font-size: 0.813rem;
-  font-weight: 600;
-  color: #64748b;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.025em;
+  letter-spacing: 0.04em;
 }
 
 .kpi-value {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #0f172a;
-  margin-bottom: 0.5rem;
-  letter-spacing: -0.025em;
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-semibold);
+  color: var(--text);
+  margin-bottom: var(--space-2);
 }
 
 .kpi-goal {
-  font-size: 0.813rem;
-  color: #64748b;
-  margin-bottom: 0.75rem;
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  margin-bottom: var(--space-3);
 }
 
+/* Progress bar track */
 .kpi-progress-bar {
   width: 100%;
   height: 6px;
-  background: #f1f5f9;
-  border-radius: 3px;
+  background: var(--gray-100);
+  border-radius: var(--radius-full);
   overflow: hidden;
 }
 
+/* Default fill = accent; .success variant = green */
 .kpi-progress {
   height: 100%;
-  background: #3b82f6;
-  border-radius: 3px;
+  background: var(--accent);
+  border-radius: var(--radius-full);
   transition: width 0.6s ease;
 }
 
 .kpi-progress.success {
-  background: #10b981;
+  background: var(--success);
 }
 
+/* ── Charts grid ── */
 .charts-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.25rem;
-  margin-bottom: 1.5rem;
+  /* minmax(0,1fr) gives each track an explicit minimum of 0 so content cannot
+     push the track wider than the available grid area. */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-6);
+  margin-bottom: var(--space-6);
 }
 
+/* Full-width spans both columns */
 .chart-card.full-width {
   grid-column: 1 / -1;
 }
 
+/* min-width: 0 overrides the default 'auto' minimum so chart cards (including
+   full-width ones containing tables) can shrink to fit their grid track. */
+.chart-card {
+  min-width: 0;
+}
+
 .chart-content {
-  padding: 1rem;
+  padding: var(--space-4);
 }
 
-.donut-chart {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 3rem;
-}
-
-.donut-svg {
-  width: 200px;
-  height: 200px;
-}
-
-.donut-legend {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.legend-item {
-  display: flex;
-  align-items: center;
-  gap: 0.625rem;
-  font-size: 0.875rem;
-  color: #475569;
-}
-
-.legend-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 2px;
-}
-
-/* Order Health Dashboard Styles */
+/* ── Order health donut ── */
 .order-health-container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
+  /* minmax(0,1fr) prevents either column from inflating the card beyond its track */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-6);
   align-items: center;
-  padding: 1rem;
+  padding: var(--space-4);
   min-height: 240px;
 }
 
@@ -872,8 +846,8 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
-  padding: 0 1rem;
+  gap: var(--space-4);
+  padding: 0 var(--space-4);
 }
 
 .donut-svg-compact {
@@ -881,39 +855,49 @@ export default {
   height: 200px;
 }
 
+/* SVG text elements — fill is set via CSS to work with custom properties */
 .donut-center-label {
-  font-size: 12px;
-  fill: #64748b;
-  font-weight: 500;
+  font-size: var(--text-xs);
+  fill: var(--text-muted);
+  font-weight: var(--weight-medium);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
 .donut-center-value {
-  font-size: 36px;
-  fill: #0f172a;
-  font-weight: 700;
+  font-size: 36px; /* intentionally large for donut center */
+  fill: var(--text);
+  font-weight: var(--weight-semibold);
 }
 
 .donut-legend-compact {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.625rem 1.25rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-2) var(--space-5);
 }
 
 .legend-item-compact {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-size: 0.875rem;
-  color: #475569;
-  font-weight: 500;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--gray-600);
+  font-weight: var(--weight-medium);
 }
 
+/* Colored square swatch for chart legend */
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* ── Order health right-column metrics ── */
 .order-health-metrics {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: var(--space-5);
   justify-content: center;
   align-items: center;
 }
@@ -921,65 +905,58 @@ export default {
 .health-metric {
   display: flex;
   flex-direction: column;
-  gap: 0.375rem;
+  gap: var(--space-1);
   text-align: center;
   width: 100%;
 }
 
 .health-metric-label {
-  font-size: 0.688rem;
-  color: #64748b;
-  font-weight: 600;
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  font-weight: var(--weight-semibold);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
 .health-metric-value {
-  font-size: 1.75rem;
-  font-weight: 700;
-  color: #0f172a;
-  letter-spacing: -0.025em;
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-semibold);
+  color: var(--text);
 }
 
-.metric-good {
-  color: #10b981;
-}
+/* Conditional colors applied via :class binding in template */
+.metric-good    { color: var(--success); }
+.metric-warning { color: #f59e0b; } /* amber — kept as-is for chart readability */
+.metric-bad     { color: var(--danger); }
 
-.metric-warning {
-  color: #f59e0b;
-}
-
-.metric-bad {
-  color: #ef4444;
-}
-
+/* ── Inventory by category horizontal bars ── */
 .horizontal-bar-chart {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  padding: 0 1rem;
+  gap: var(--space-6);
+  padding: 0 var(--space-4);
 }
 
 .h-bar-item {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: var(--space-4);
 }
 
 .h-bar-label {
   width: 120px;
   min-width: 120px;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #475569;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--gray-600);
   flex-shrink: 0;
 }
 
 .h-bar-container {
   flex: 1;
   height: 32px;
-  background: #f8fafc;
-  border-radius: 6px;
+  background: var(--gray-50);
+  border-radius: var(--radius-sm);
   overflow: hidden;
 }
 
@@ -988,19 +965,20 @@ export default {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  padding-right: 0.75rem;
+  padding-right: var(--space-3);
   transition: width 0.6s ease;
 }
 
 .h-bar-value {
-  font-size: 0.813rem;
-  font-weight: 700;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
   color: white;
 }
 
+/* ── Line/bar chart (order trend) ── */
 .line-chart {
   display: flex;
-  gap: 1.5rem;
+  gap: var(--space-6);
   height: 280px;
 }
 
@@ -1008,18 +986,19 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding-right: 1rem;
-  font-size: 0.75rem;
-  color: #94a3b8;
-  border-right: 1px solid #e2e8f0;
+  padding-right: var(--space-4);
+  font-size: var(--text-xs);
+  color: var(--gray-400);
+  border-right: 1px solid var(--gray-200);
 }
 
 .line-chart-area {
   flex: 1;
+  min-width: 0; /* flex children default to min-width:auto; this lets the area shrink */
   display: flex;
   align-items: flex-end;
   justify-content: space-around;
-  gap: 0.5rem;
+  gap: var(--space-2);
 }
 
 .line-bar-group {
@@ -1028,7 +1007,7 @@ export default {
   align-items: center;
   flex: 1;
   max-width: 80px;
-  gap: 0.5rem;
+  gap: var(--space-2);
 }
 
 .line-bar-wrapper {
@@ -1044,228 +1023,96 @@ export default {
   width: 100%;
   max-width: 60px;
   min-height: 8px;
-  background: #3b82f6;
-  border-radius: 6px 6px 0 0;
-  transition: all 0.3s ease;
+  background: var(--accent);
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  transition: background var(--transition-fast);
   cursor: pointer;
-  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
 }
 
 .line-bar.empty-bar {
-  background: #e2e8f0;
-  box-shadow: none;
+  background: var(--gray-200);
   min-height: 4px;
 }
 
-.line-bar:hover {
-  background: #2563eb;
-  transform: scaleY(1.05);
-}
+.line-bar:hover { background: var(--accent-hover); }
 
-.line-bar.empty-bar:hover {
-  background: #cbd5e1;
-  transform: none;
-}
+.line-bar.empty-bar:hover { background: var(--gray-300); }
 
 .line-bar-label {
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: #64748b;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  color: var(--text-muted);
   white-space: nowrap;
 }
 
+/* ── Empty/no-data states ── */
 .no-data {
-  padding: 2rem;
+  padding: var(--space-8);
   text-align: center;
-  color: #94a3b8;
-  font-size: 0.875rem;
+  color: var(--gray-400);
+  font-size: var(--text-sm);
 }
 
 .no-backlog {
-  padding: 3rem;
+  padding: var(--space-12);
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: var(--space-4);
 }
 
 .success-icon {
   width: 48px;
   height: 48px;
-  color: #10b981;
+  color: var(--success);
 }
 
 .no-backlog-text {
-  font-size: 1.125rem;
-  color: #10b981;
-  font-weight: 600;
+  font-size: var(--text-lg);
+  color: var(--success);
+  font-weight: var(--weight-semibold);
   margin: 0;
 }
 
+/* ── Table interaction ── */
 .clickable-row {
   cursor: pointer;
-  transition: background-color 0.15s ease;
+  transition: background-color var(--transition-fast);
 }
 
 .clickable-row:hover {
-  background: #eff6ff !important;
+  background: var(--accent-subtle) !important;
 }
 
-/* Tasks Card Styles */
-.tasks-card {
-  margin-bottom: 2rem;
-}
-
-.tasks-content {
-  padding: 1.5rem;
-}
-
-.task-input-container {
-  display: flex;
-  gap: 0.75rem;
-  margin-bottom: 1rem;
-}
-
-.task-input {
-  flex: 1;
-  padding: 0.75rem;
-  border: 2px solid #e2e8f0;
-  border-radius: 8px;
-  font-size: 0.95rem;
-  transition: border-color 0.2s ease;
-}
-
-.task-input:focus {
-  outline: none;
-  border-color: #667eea;
-}
-
-.task-add-btn {
-  padding: 0.75rem 1.5rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: transform 0.2s ease, opacity 0.2s ease;
-}
-
-.task-add-btn:hover:not(:disabled) {
-  transform: translateY(-2px);
-}
-
-.task-add-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.no-tasks {
-  text-align: center;
-  padding: 2rem;
-  color: #64748b;
-  font-style: italic;
-}
-
-.tasks-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.task-item {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem;
-  background: #f8fafc;
-  border-radius: 8px;
-  border: 2px solid transparent;
-  transition: all 0.2s ease;
-}
-
-.task-item:hover {
-  border-color: #e2e8f0;
-  background: white;
-}
-
-.task-item.completed {
-  opacity: 0.6;
-}
-
-.task-item.completed .task-text {
-  text-decoration: line-through;
-  color: #94a3b8;
-}
-
-.task-checkbox {
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-  accent-color: #667eea;
-}
-
-.task-text {
-  flex: 1;
-  cursor: pointer;
-  user-select: none;
-  color: #0f172a;
-  font-size: 0.95rem;
-}
-
-.task-delete-btn {
-  width: 28px;
-  height: 28px;
-  background: #ef4444;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-size: 1.25rem;
-  line-height: 1;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-}
-
-.task-delete-btn:hover {
-  background: #dc2626;
-  transform: scale(1.1);
-}
-
+/* ── Purchase-order action buttons in backlog table ── */
 .po-button {
-  padding: 0.5rem 1rem;
+  height: 32px;
+  padding: 0 var(--space-4);
   border: none;
-  border-radius: 6px;
-  font-size: 0.813rem;
-  font-weight: 600;
+  border-radius: var(--radius-md);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background var(--transition-fast);
   white-space: nowrap;
 }
 
 .po-button.create {
-  background: #3b82f6;
-  color: white;
+  background: var(--accent);
+  color: #fff;
 }
 
 .po-button.create:hover {
-  background: #2563eb;
-  transform: translateY(-1px);
-  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+  background: var(--accent-hover);
 }
 
 .po-button.view {
-  background: #64748b;
-  color: white;
+  background: var(--gray-500);
+  color: #fff;
 }
 
 .po-button.view:hover {
-  background: #475569;
-  transform: translateY(-1px);
-  box-shadow: 0 2px 4px rgba(100, 116, 139, 0.3);
+  background: var(--gray-600);
 }
 </style>
